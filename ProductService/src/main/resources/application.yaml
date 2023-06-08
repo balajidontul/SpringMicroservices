@@ -4,8 +4,10 @@ server:
 spring:
   application:
     name: PRODUCT-SERVICE
+  config:
+    import: configserver:http://localhost:9001
   datasource:
-    url: jdbc:h2:mem:mydb
+    url: jdbc:h2:mem:productService
     username: sa
     password: password
     driverClassName: org.h2.Driver
@@ -18,13 +20,3 @@ spring:
     hibernate:
       ddl-auto: update
 
-
-
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:9000/eureka}
-  instance:
-    preferIpAddress: true

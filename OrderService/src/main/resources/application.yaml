@@ -5,6 +5,8 @@ server:
 spring:
   application:
     name: ORDER-SERVICE
+  config:
+    import: configserver:http://localhost:9001
   datasource:
     url: jdbc:h2:mem:orderService
     username: sa
@@ -21,11 +23,3 @@ spring:
 
 
 
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:9000/eureka}
-  instance:
-    preferIpAddress: true
