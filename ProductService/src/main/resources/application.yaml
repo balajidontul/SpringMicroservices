@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: PRODUCT-SERVICE
   datasource:
     url: jdbc:h2:mem:mydb
     username: sa
@@ -15,3 +17,14 @@ spring:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+
+
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:9000/eureka}
+  instance:
+    preferIpAddress: true
