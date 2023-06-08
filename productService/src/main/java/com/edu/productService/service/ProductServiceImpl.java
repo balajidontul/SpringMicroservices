@@ -1,6 +1,7 @@
 package com.edu.productService.service;
 
 import com.edu.productService.entity.Product;
+import com.edu.productService.exception.ProductServiceCustomException;
 import com.edu.productService.model.ProductRequest;
 import com.edu.productService.model.ProductResponse;
 import com.edu.productService.repository.ProductRepository;
@@ -38,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
         log.info("Get the product for productid: {}",productId);
         Product product = productRepository.findById(productId)
                 .orElseThrow(
-                        () -> new RuntimeException("Product with given id not found"));
+                        () -> new ProductServiceCustomException("Product with given id not found","PRODUCT_NOT_FOUND"));
         ProductResponse productResponse = new ProductResponse();
         copyProperties(product,productResponse);
         return productResponse;
