@@ -7,4 +7,6 @@ public interface ProductService {
     long addProduct(ProductRequest productRequest);
 
     ProductResponse getProductById(long id);
+
+    void reduceQuantity(long productId, long quantity);
 }

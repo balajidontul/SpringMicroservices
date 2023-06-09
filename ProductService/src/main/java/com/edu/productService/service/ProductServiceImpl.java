@@ -44,4 +44,25 @@ public class ProductServiceImpl implements ProductService {
         copyProperties(product,productResponse);
         return productResponse;
     }
+
+    @Override
+    public void reduceQuantity(long productId, long quantity) {
+        log.info("Reduce Quantity {} for Id {} ",quantity,productId);
+
+        Product product = productRepository.findById(productId).orElseThrow(
+                () -> new ProductServiceCustomException(
+                        "Product With Given ID Not Found",
+                        "PRODUCT_NOT_FOUND"
+                ));
+        if(product.getQuantity() < quantity){
+            throw new ProductServiceCustomException(
+                    "Product does not have sufficent Quantity",
+                    "INSUFFICIENT_QUANTITY"
+            );
+        }
+
+        product.setQuantity(product.getQuantity() - quantity);
+        productRepository.save(product);
+        log.info("Product Quantity Updated Successfully");
+    }
 }
