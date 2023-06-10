@@ -1,6 +1,7 @@
 package com.edu.OrderService.service;
 
 import com.edu.OrderService.entity.Order;
+import com.edu.OrderService.external.client.ProductService;
 import com.edu.OrderService.model.OrderRequest;
 import com.edu.OrderService.repository.OrderRepository;
 import lombok.extern.log4j.Log4j2;
@@ -16,9 +17,15 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     OrderRepository orderRepository;
 
+    @Autowired
+    ProductService productService;
+
     @Override
     public Long placeOrder(OrderRequest orderRequest) {
         log.info("Inside Order repository - placing order request: {}", orderRequest);
+
+        productService.reduceQuantity(orderRequest.getProductId(),orderRequest.getQuantity());
+
         Order order = Order.builder()
                 .amount(orderRequest.getTotalAmount())
                 .orderStatus("CREATED")
