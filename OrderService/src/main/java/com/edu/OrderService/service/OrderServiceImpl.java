@@ -84,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
 
         log.info("Inside getOrder of Order service - Getting Product information for get order call");
 
-        ProductResponse productResponse =  restTemplate.getForObject("http://PRODUCT-SERVICE/product/"+order.getProductId(), ProductResponse.class );
+        ProductResponse productResponse =  restTemplate.getForObject("http://API-GATEWAY/product/"+order.getProductId(), ProductResponse.class );
 
         OrderResponse.ProductDetails productDetails = OrderResponse.ProductDetails.builder()
                 .productName(productResponse.getProductName())
@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
 
         log.info("Inside getOrder of Order service - Getting payment information for get order call");
 
-        PaymentResponse paymentResponse = restTemplate.getForObject("http://PAYMENT-SERVICE/payment/"+id, PaymentResponse.class);
+        PaymentResponse paymentResponse = restTemplate.getForObject("http://API-GATEWAY/payment/"+id, PaymentResponse.class);
 
         OrderResponse.PaymentDetails paymentDetails =
                 OrderResponse.PaymentDetails.builder()

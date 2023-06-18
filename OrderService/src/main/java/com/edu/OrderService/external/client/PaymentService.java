@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "PAYMENT-SERVICE/payment")
+@FeignClient(name = "API-GATEWAY/payment")
 public interface PaymentService {
 
     @PostMapping
